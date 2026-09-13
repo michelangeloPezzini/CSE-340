@@ -101,6 +101,22 @@ main {
   flex: 1;
 }
 
+/* Hero image on home page */
+.home-hero {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.home-hero img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 h1,
 h2 {
   margin-top: 0;
