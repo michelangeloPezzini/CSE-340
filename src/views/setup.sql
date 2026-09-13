@@ -26,3 +26,29 @@ VALUES
     'hello@unityserve.org',
     'unityserve-logo.png'
 );
+
+CREATE TABLE project (
+    project_id      SERIAL PRIMARY KEY,
+    organization_id INT NOT NULL REFERENCES organization(organization_id),
+    title           VARCHAR(200) NOT NULL,
+    description     TEXT NOT NULL,
+    location        VARCHAR(200) NOT NULL,
+    date            DATE NOT NULL
+);
+
+INSERT INTO project (organization_id, title, description, location, date) VALUES
+(1, 'Community Center Renovation', 'Renovate the downtown community center roof and walls.', 'Downtown, Springfield', '2026-10-05'),
+(1, 'Playground Build', 'Build a new playground for Elm Street Park.', 'Elm Street Park, Springfield', '2026-10-19'),
+(1, 'School Library Repair', 'Fix broken shelving and repaint the school library.', 'Lincoln Elementary, Springfield', '2026-11-02'),
+(1, 'Bridge Walkway Restoration', 'Restore the pedestrian walkway on River Bridge.', 'River Bridge, Springfield', '2026-11-16'),
+(1, 'Senior Center Accessibility Ramp', 'Install accessibility ramp at the senior center.', 'Maple Ave Senior Center, Springfield', '2026-12-07'),
+(2, 'Community Garden Planting Day', 'Plant spring vegetables at the neighborhood garden.', 'Riverside Community Garden, Springfield', '2026-10-10'),
+(2, 'Urban Composting Workshop', 'Teach composting techniques to 30 families.', 'GreenHarvest Hub, Springfield', '2026-10-24'),
+(2, 'School Garden Installation', 'Install raised-bed garden at Jefferson Middle School.', 'Jefferson Middle School, Springfield', '2026-11-07'),
+(2, 'Farmers Market Volunteering', 'Help run the monthly sustainable produce market.', 'Central Plaza, Springfield', '2026-11-21'),
+(2, 'Winter Greenhouse Build', 'Construct a small greenhouse for year-round growing.', 'Riverside Community Garden, Springfield', '2026-12-12'),
+(3, 'Food Pantry Restock Drive', 'Collect and sort donated food items for the local pantry.', 'Unity Food Pantry, Springfield', '2026-10-08'),
+(3, 'Holiday Gift Wrapping', 'Wrap gifts for 200 children in underprivileged families.', 'Unity Community Hall, Springfield', '2026-11-28'),
+(3, 'Coat Drive Distribution', 'Distribute donated coats to homeless shelters.', 'Downtown Shelter, Springfield', '2026-12-01'),
+(3, 'Senior Companion Visits', 'Visit isolated seniors for companionship and assistance.', 'Sunview Retirement Home, Springfield', '2026-12-14'),
+(3, 'New Year Cleanup Campaign', 'Community street cleanup to start the new year fresh.', 'Main Street, Springfield', '2027-01-03');
