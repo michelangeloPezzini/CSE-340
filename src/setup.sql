@@ -1,9 +1,9 @@
 CREATE TABLE organization (
     organization_id SERIAL PRIMARY KEY,
-    name VARCHAR(150) NOT NULL,
-    description TEXT NOT NULL,
-    contact_email VARCHAR(255) NOT NULL,
-    logo_filename VARCHAR(255) NOT NULL
+    name            VARCHAR(150) NOT NULL,
+    description     TEXT NOT NULL,
+    contact_email   VARCHAR(255) NOT NULL,
+    logo_filename   VARCHAR(255) NOT NULL
 );
 
 INSERT INTO organization (name, description, contact_email, logo_filename)
@@ -52,3 +52,38 @@ INSERT INTO project (organization_id, title, description, location, date) VALUES
 (3, 'Coat Drive Distribution', 'Distribute donated coats to homeless shelters.', 'Downtown Shelter, Springfield', '2026-12-01'),
 (3, 'Senior Companion Visits', 'Visit isolated seniors for companionship and assistance.', 'Sunview Retirement Home, Springfield', '2026-12-14'),
 (3, 'New Year Cleanup Campaign', 'Community street cleanup to start the new year fresh.', 'Main Street, Springfield', '2027-01-03');
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name        VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE project_category (
+    project_id  INT NOT NULL REFERENCES project(project_id),
+    category_id INT NOT NULL REFERENCES category(category_id),
+    PRIMARY KEY (project_id, category_id)
+);
+
+INSERT INTO category (name) VALUES
+('Environmental'),
+('Education'),
+('Community Service'),
+('Health & Wellness'),
+('Construction & Infrastructure');
+
+INSERT INTO project_category (project_id, category_id) VALUES
+(1,  5), (1,  3),
+(2,  5), (2,  3),
+(3,  5), (3,  2),
+(4,  5),
+(5,  5), (5,  4),
+(6,  1), (6,  3),
+(7,  1), (7,  2),
+(8,  1), (8,  2),
+(9,  1), (9,  3),
+(10, 1),
+(11, 3), (11, 4),
+(12, 3),
+(13, 3), (13, 4),
+(14, 3), (14, 4),
+(15, 1), (15, 3);
