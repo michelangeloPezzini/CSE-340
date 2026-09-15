@@ -1,3 +1,9 @@
+-- Drop tables in reverse dependency order so FK constraints don't block the drops
+DROP TABLE IF EXISTS project_category CASCADE;
+DROP TABLE IF EXISTS project CASCADE;
+DROP TABLE IF EXISTS category CASCADE;
+DROP TABLE IF EXISTS organization CASCADE;
+
 CREATE TABLE organization (
     organization_id SERIAL PRIMARY KEY,
     name            VARCHAR(150) NOT NULL,
@@ -29,11 +35,14 @@ VALUES
 
 CREATE TABLE project (
     project_id      SERIAL PRIMARY KEY,
-    organization_id INT NOT NULL REFERENCES organization(organization_id),
+    organization_id INT NOT NULL,
     title           VARCHAR(200) NOT NULL,
     description     TEXT NOT NULL,
     location        VARCHAR(200) NOT NULL,
-    date            DATE NOT NULL
+    date            DATE NOT NULL,
+    CONSTRAINT fk_project_organization
+        FOREIGN KEY (organization_id)
+        REFERENCES organization(organization_id)
 );
 
 INSERT INTO project (organization_id, title, description, location, date) VALUES
@@ -58,18 +67,24 @@ CREATE TABLE category (
     name        VARCHAR(100) NOT NULL UNIQUE
 );
 
-CREATE TABLE project_category (
-    project_id  INT NOT NULL REFERENCES project(project_id),
-    category_id INT NOT NULL REFERENCES category(category_id),
-    PRIMARY KEY (project_id, category_id)
-);
-
 INSERT INTO category (name) VALUES
 ('Environmental'),
 ('Education'),
 ('Community Service'),
 ('Health & Wellness'),
 ('Construction & Infrastructure');
+
+CREATE TABLE project_category (
+    project_id  INT NOT NULL,
+    category_id INT NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    CONSTRAINT fk_pc_project
+        FOREIGN KEY (project_id)
+        REFERENCES project(project_id),
+    CONSTRAINT fk_pc_category
+        FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+);
 
 INSERT INTO project_category (project_id, category_id) VALUES
 (1,  5), (1,  3),
