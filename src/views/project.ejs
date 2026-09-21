@@ -6,5 +6,13 @@
     <p><strong>Location:</strong> <%= project.location %></p>
     <p><strong>Description:</strong> <%= project.description %></p>
     <p><strong>Organization:</strong> <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a></p>
+
+    <% if (categories && categories.length > 0) { %>
+        <p><strong>Categories:</strong>
+            <% categories.forEach((category, index) => { %>
+                <a href="/category/<%= category.category_id %>"><%= category.name %></a><% if (index < categories.length - 1) { %>, <% } %>
+            <% }) %>
+        </p>
+    <% } %>
 </main>
 <%- include('partials/footer') %>
