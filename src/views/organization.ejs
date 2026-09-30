@@ -1,17 +1,26 @@
 <%- include('partials/header') %>
 <main>
     <h1><%= title %></h1>
-
-    <h2><%= organizationDetails.name %></h2>
     <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
 
-    <p>Description: <%= organizationDetails.description %></p>
+    <div class="detail-meta">
+        <p><strong>Description:</strong> <%= organizationDetails.description %></p>
+        <p><strong>Contact:</strong> <a href="mailto:<%= organizationDetails.contact_email %>"><%= organizationDetails.contact_email %></a></p>
+    </div>
 
-    <h3>Service Projects</h3>
+    <h2>Service Projects</h2>
     <ul>
         <% projects.forEach(project => { %>
-            <li><a href="/project/<%= project.project_id %>"><%= project.title %></a></li>
+            <% const formattedDate = new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) %>
+            <li>
+                <a href="/project/<%= project.project_id %>"><%= project.title %></a>
+                <br><small><%= formattedDate %> &mdash; <%= project.location %></small>
+            </li>
         <% }) %>
     </ul>
+
+    <div class="page-actions">
+        <a href="/edit-organization/<%= organizationDetails.organization_id %>" class="btn-action">Edit Organization</a>
+    </div>
 </main>
 <%- include('partials/footer') %>

@@ -6,8 +6,15 @@
     <ul>
         <% projects.forEach(project => { %>
             <% const formattedDate = new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) %>
-            <li><a href="/project/<%= project.project_id %>"><%= project.title %></a> — <%= formattedDate %></li>
+            <li>
+                <a href="/project/<%= project.project_id %>"><%= project.title %></a>
+                <br><small><%= formattedDate %> &mdash; <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a></small>
+            </li>
         <% }) %>
     </ul>
+
+    <div class="page-actions">
+        <a href="/edit-category/<%= category.category_id %>" class="btn-action">Edit Category</a>
+    </div>
 </main>
 <%- include('partials/footer') %>

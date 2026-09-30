@@ -348,6 +348,107 @@ button[type='submit']:active {
 
 /* ── End Forms ──────────────────────────────────────── */
 
+/* ── Category tags ─────────────────────────────────── */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.tag:hover {
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+
+.tag:nth-child(8n+1) { background: #e8f5e9; color: #2e7d32; }
+.tag:nth-child(8n+2) { background: #e1f5fe; color: #01579b; }
+.tag:nth-child(8n+3) { background: #fff8e1; color: #e65100; }
+.tag:nth-child(8n+4) { background: #ede7f6; color: #4527a0; }
+.tag:nth-child(8n+5) { background: #fce4ec; color: #880e4f; }
+.tag:nth-child(8n+6) { background: #e0f2f1; color: #00695c; }
+.tag:nth-child(8n+7) { background: #e8eaf6; color: #283593; }
+.tag:nth-child(8n+8) { background: #efebe9; color: #4e342e; }
+
+/* ── Assign categories checkboxes ──────────────────── */
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--background);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+}
+
+.checkbox-option:hover {
+  border-color: var(--primary);
+}
+
+.checkbox-option:has(input:checked) {
+  border-color: var(--primary);
+  background: #e8f5ee;
+  color: var(--primary-dark);
+}
+
+.checkbox-option input[type='checkbox'] {
+  accent-color: var(--primary);
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* ── Detail page meta info ─────────────────────────── */
+.detail-meta {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-meta p {
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+/* ── Page action links ─────────────────────────────── */
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* ── End additions ──────────────────────────────────── */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

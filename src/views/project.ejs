@@ -2,17 +2,27 @@
 <main>
     <h1><%= title %></h1>
 
-    <p><strong>Date:</strong> <%= new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) %></p>
-    <p><strong>Location:</strong> <%= project.location %></p>
-    <p><strong>Description:</strong> <%= project.description %></p>
-    <p><strong>Organization:</strong> <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a></p>
+    <div class="detail-meta">
+        <p><strong>Date:</strong> <%= new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) %></p>
+        <p><strong>Location:</strong> <%= project.location %></p>
+        <p><strong>Organization:</strong> <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a></p>
+        <p><strong>Description:</strong> <%= project.description %></p>
+    </div>
 
     <% if (categories && categories.length > 0) { %>
-        <p><strong>Categories:</strong>
-            <% categories.forEach((category, index) => { %>
-                <a href="/category/<%= category.category_id %>"><%= category.name %></a><% if (index < categories.length - 1) { %>, <% } %>
+        <p><strong>Categories:</strong></p>
+        <div class="tag-list">
+            <% categories.forEach(category => { %>
+                <a href="/category/<%= category.category_id %>" class="tag"><%= category.name %></a>
             <% }) %>
-        </p>
+        </div>
+    <% } else { %>
+        <p><em>No categories assigned yet.</em></p>
     <% } %>
+
+    <div class="page-actions">
+        <a href="/edit-project/<%= project.project_id %>" class="btn-action">Edit Project</a>
+        <a href="/assign-categories/<%= project.project_id %>" class="btn-action">Edit Categories</a>
+    </div>
 </main>
 <%- include('partials/footer') %>
