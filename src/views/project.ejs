@@ -21,6 +21,17 @@
     <% } %>
 
     <div class="page-actions">
+        <% if (isLoggedIn) { %>
+            <% if (volunteering) { %>
+                <form action="/project/<%= project.project_id %>/remove-volunteer" method="POST" style="display:inline;">
+                    <button type="submit" class="btn-action btn-danger">Remove Volunteer Signup</button>
+                </form>
+            <% } else { %>
+                <form action="/project/<%= project.project_id %>/volunteer" method="POST" style="display:inline;">
+                    <button type="submit" class="btn-action">Volunteer for this Project</button>
+                </form>
+            <% } %>
+        <% } %>
         <% if (user && user.role_name === 'admin') { %>
             <a href="/edit-project/<%= project.project_id %>" class="btn-action">Edit Project</a>
             <a href="/assign-categories/<%= project.project_id %>" class="btn-action">Edit Categories</a>

@@ -10,7 +10,7 @@ import {
   processEditOrganizationForm,
   organizationValidation,
 } from './controllers/organizations.js';
-import { showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm, showEditProjectForm, processEditProjectForm, projectValidation } from './controllers/projects.js';
+import { showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm, showEditProjectForm, processEditProjectForm, projectValidation, addVolunteerToProject, removeVolunteerFromProject } from './controllers/projects.js';
 import { showCategoriesPage, showCategoryDetailsPage, showNewCategoryForm, processNewCategoryForm, showEditCategoryForm, processEditCategoryForm, showAssignCategoriesForm, processAssignCategoriesForm, categoryValidation } from './controllers/categories.js';
 import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, showDashboard, showUsersPage, requireLogin, requireRole } from './controllers/users.js';
 import { testErrorPage } from './controllers/errors.js';
@@ -38,6 +38,10 @@ router.get('/organization/:id', showOrganizationDetailsPage);
 
 // Route for project details page
 router.get('/project/:id', showProjectDetailsPage);
+
+// Volunteer routes
+router.post('/project/:id/volunteer', requireLogin, addVolunteerToProject);
+router.post('/project/:id/remove-volunteer', requireLogin, removeVolunteerFromProject);
 
 // Routes for new project
 router.get('/new-project', requireRole('admin'), showNewProjectForm);
