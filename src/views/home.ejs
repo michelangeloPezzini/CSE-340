@@ -9,5 +9,8 @@
         <figure class="home-hero">
             <img src="/images/service.png" alt="Volunteers connecting and serving the community">
         </figure>
+        <% if (isLoggedIn) { %>
+            <p><a href="/dashboard">My Dashboard</a></p>
+        <% } %>
     </main>
     <%- include('partials/footer') %>
